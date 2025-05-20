@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -48,6 +49,10 @@ public class UserController {
     @GetMapping(value = "/search", params = {"name", "age"})
     public List<User> searchByNameAndAge(@RequestParam String name, @RequestParam int age) {
         return userRepository.findByNameAndAge(name, age);
+    }
+    @GetMapping(value = "/{id}")
+    public Optional<User> findById(@PathVariable Long id) {
+        return userRepository.findById(id);
     }
 
     @DeleteMapping("/{id}")
